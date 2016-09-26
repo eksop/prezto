@@ -11,3 +11,17 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+HISTSIZE=50000
+SAVEHIST=50000
+
+setopt HIST_IGNORE_DUPS
+
+# Exports
+source ~/.exports
+
+# Functions
+source ~/.functions
+
+# Aliases
+source ~/.aliases
