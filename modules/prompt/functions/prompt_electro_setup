@@ -3,35 +3,11 @@
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-# Screenshots:
-#   http://i.imgur.com/nrGV6pg.png
-#
-
-#
-# 16 Terminal Colors
-# -- ---------------
-#  0 black
-#  1 red
-#  2 green
-#  3 yellow
-#  4 blue
-#  5 magenta
-#  6 cyan
-#  7 white
-#  8 bright black
-#  9 bright red
-# 10 bright green
-# 11 bright yellow
-# 12 bright blue
-# 13 bright magenta
-# 14 bright cyan
-# 15 bright white
+#   Rajat Shukla <shk.rajat@gmail.com>
 #
 
 # Load dependencies.
 pmodload 'helper'
-
 
 function _xt_set_pwd() {
   local pwd="${PWD/#$HOME/~}"
@@ -57,17 +33,9 @@ function _xt_set_user_host() {
 function _xt_set_timer() {
   if [ $xt_timer ]; then
     timer_show=$(($SECONDS - $xt_timer))
-    _xt_timer_show="%F{green}⏰  ${timer_show}s%f %F{black}%BΞ%b%f "
+    _xt_timer_show="%F{green}${timer_show}s%f %F{black}%BΞ%b%f "
     unset xt_timer
   fi
-
-  if [ $xt_idle ]; then
-    idle_show=$(($SECONDS - $xt_idle))
-    _xt_idle_show="%F{blue}⌛ ${idle_show}s%f %F{black}%BΞ%b%f "
-  fi
-
-  unset xt_idle
-  xt_idle=${xt_idle:-$SECONDS}
 }
 
 function prompt_electro_preexec {
@@ -110,79 +78,14 @@ function prompt_electro_setup {
   zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format ' %F{3}♺%f'
   zstyle ':prezto:module:editor:info:keymap:alternate' format ' %B%F{2}❮%F{3}❮%F{1}❮%f%b'
 
-  # Formats:
-  #   %b - branchname
-  #   %u - unstagedstr (see below)
-  #   %c - stagedstr (see below)
-  #   %a - action (e.g. rebase-i)
-  #   %R - repository path
-  #   %S - path in the repository
-  # local branch_format="(${_prompt_steeef_colors[1]}%b%f%u%c)"
-  # local action_format="(${_prompt_steeef_colors[5]}%a%f)"
-  # local unstaged_format="${_prompt_steeef_colors[2]}✚%f"
-  # local staged_format="${_prompt_steeef_colors[5]}●%f"
-
-  # zstyle ':vcs_info:*' actionformats "(%s|%a)[%i%u %b %m] "
-
   # Set vcs_info parameters.
-  # zstyle ':vcs_info:*' enable bzr git hg svn
-  # zstyle ':vcs_info:*' max-exports 3
-  # zstyle ':vcs_info:*:prompt:*' check-for-changes true
-  # zstyle ':vcs_info:*:prompt:*' unstagedstr "${unstaged_format}"
-  # zstyle ':vcs_info:*:prompt:*' stagedstr "${staged_format}"
-  # zstyle ':vcs_info:*:prompt:*' actionformats "${branch_format}${action_format}"
-  # zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
-  # zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
-
   zstyle ':vcs_info:*' enable bzr git hg svn
-
-
-  # Choose from these λ ⇒ Ψ χ ✪ ⚛ ✎  ϟ ϡ ॐ ༒ ツ 𐌎 𐌈 ⇪ ⇥ ⬢ ⚓
-  # Choose from these x, ×, X, ✕, ☓, ✖, ✗, ✘, ✓, ✔, ⦿, ⦾
-
-
-  # Set vcs_info parameters.
   zstyle ':vcs_info:*' check-for-changes true
   zstyle ':vcs_info:*' stagedstr '%F{yellow} ✔%f'
   zstyle ':vcs_info:*' unstagedstr '%F{red} ✘%f'
   zstyle ':vcs_info:*' actionformats '%F{black}%BΞ%%b%f %F{blue}%b%f%c%u %F{yellow}(%a)%f '
   zstyle ':vcs_info:*' formats "%F{black}%BΞ%%b%f %F{blue}%b%f%c%u "
-  zstyle ':vcs_info:*' nvcsformats ""
-
-  # Set vcs_info hooks.
-  # NOTE: Prior to Zsh v4.3.12, there are no static hooks, no vcs_info_hookadd
-  #       function, and no 'no-vcs' hook.
-
-  # zstyle ':vcs_info:*:prompt:*' formats '%R/(%b)%S'
-
-  # zstyle ':vcs_info:*' max-exports 3
-  # zstyle ':vcs_info:*:prompt:*' check-for-changes true
-  # zstyle ':vcs_info:*:prompt:*' unstagedstr "✚%f "
-  # zstyle ':vcs_info:*:prompt:*' stagedstr "●%f "
-  # zstyle ':vcs_info:*:prompt:*' actionformats "%{%F{2}%}%B Ξ%%b %{%F{6}}%b %a %c %u "
-  # zstyle ':vcs_info:*:prompt:*' branchformat "%b"
-  # zstyle ':vcs_info:*:prompt:*' formats "%{%F{2}%}%B Ξ%%b %{%F{6}}%b"
-  # zstyle ':vcs_info:*:prompt:*' nvcsformats ""
-
-
-  # Set git-info parameters.
-  # zstyle ':prezto:module:git:info' verbose 'yes'
-  # zstyle ':prezto:module:git:info:action' format '%F{7}:%f%%B%F{9}%s%f%%b'
-  # zstyle ':prezto:module:git:info:added' format ' %%B%F{2}✚%f%%b'
-  # zstyle ':prezto:module:git:info:ahead' format ' %%B%F{13}⬆%f%%b'
-  # zstyle ':prezto:module:git:info:behind' format ' %%B%F{13}⬇%f%%b'
-  # zstyle ':prezto:module:git:info:branch' format ' %%B%F{2}%b%f%%b'
-  # zstyle ':prezto:module:git:info:commit' format ' %%B%F{3}%.7c%f%%b'
-  # zstyle ':prezto:module:git:info:deleted' format ' %%B%F{1}✖%f%%b'
-  # zstyle ':prezto:module:git:info:modified' format ' %%B%F{4}✱%f%%b'
-  # zstyle ':prezto:module:git:info:position' format ' %%B%F{13}%p%f%%b'
-  # zstyle ':prezto:module:git:info:renamed' format ' %%B%F{5}➜%f%%b'
-  # zstyle ':prezto:module:git:info:stashed' format ' %%B%F{6}✭%f%%b'
-  # zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{3}═%f%%b'
-  # zstyle ':prezto:module:git:info:untracked' format ' %%B%F{7}◼%f%%b'
-  # zstyle ':prezto:module:git:info:keys' format \
-  #   'status' '$(coalesce "%b" "%p" "%c")%s%A%B%S%a%d%m%r%U%u'
-  #   41216434
+  zstyle ':vcs_info:*' nvcsformats "%b%f"
 
   # Define prompts.
   #
@@ -193,7 +96,7 @@ function prompt_electro_setup {
 
   PROMPT2='%{%F{cyan}%}%B◀ %{${reset_color}%}%b'
 
-  RPROMPT='%{$(echotc UP 1)%}%{%F{cyan}%}%B[%b ${_xt_timer_show}${_xt_idle_show}%{%F{green}%}%T %{%F{cyan}%}%B]%b%{$(echotc DO 1)%}%{$reset_color%}%b'
+  RPROMPT='%{$(echotc UP 1)%}%{%F{cyan}%}%B[%b ${_xt_timer_show}%{%F{green}%}%T %{%F{cyan}%}%B]%b%{$(echotc DO 1)%}%{$reset_color%}%b'
 
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? %{${reset_color}%}%b'
 }
