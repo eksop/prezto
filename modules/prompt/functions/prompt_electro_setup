@@ -9,6 +9,18 @@
 # Load dependencies.
 pmodload 'helper'
 
+function _xt_displaytime() {
+  local T=$1
+  local D=$((T/60/60/24))
+  local H=$((T/60/60%24))
+  local M=$((T/60%60))
+  local S=$((T%60))
+  (( $D > 0 )) && printf '%dd ' $D
+  (( $H > 0 )) && printf '%dh ' $H
+  (( $M > 0 )) && printf '%dm ' $M
+  printf '%ds' $S
+}
+
 function _xt_set_pwd() {
   local pwd="${PWD/#$HOME/~}"
 
@@ -32,8 +44,8 @@ function _xt_set_user_host() {
 
 function _xt_set_timer() {
   if [ $xt_timer ]; then
-    timer_show=$(($SECONDS - $xt_timer))
-    _xt_timer_show="%F{green}${timer_show}s%f %F{black}%BΞ%b%f "
+    timer_show=$(_xt_displaytime ($(($SECONDS - $xt_timer))))
+    _xt_timer_show="%F{green}${timer_show}%f %F{black}%BΞ%b%f "
     unset xt_timer
   fi
 }
