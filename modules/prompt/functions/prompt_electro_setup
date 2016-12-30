@@ -29,14 +29,15 @@ function _xt_set_pwd() {
     unset MATCH
   else
     _prompt_xt_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
+    # _prompt_xt_pwd="${${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}:h}%/}//\%/%%}/${${${${pwd}:h}:t}//\%/%%}/${${pwd:t}//\%/%%}"
   fi
 }
 
 function _xt_set_user_host() {
   if [[ "$SSH_CONNECTION" != '' ]]; then
-    _prompt_xt_user_host="%(!:%{%F{red}%}:%{%F{blue}%})%n%{%F{black}%}%B Ξ%b %{%F{cyan}%}%m %{%F{black}%}%BΞ%b "
+    _prompt_xt_user_host="%(!:%{%F{red}%}:%{%F{green}%})%n%{%F{black}%}%B Ξ%b %{%F{cyan}%}%m %{%F{black}%}%BΞ%b "
   elif [[ $UID -eq 0 ]]; then
-    _prompt_xt_user_host="%(!:%{%F{red}%}:%{%F{blue}%})%n%{%F{black}%}%B Ξ%b %{%F{cyan}%}%m %{%F{black}%}%BΞ%b "
+    _prompt_xt_user_host="%(!:%{%F{red}%}:%{%F{green}%})%n%{%F{black}%}%B Ξ%b %{%F{cyan}%}%m %{%F{black}%}%BΞ%b "
   else
     _prompt_xt_user_host=""
   fi
@@ -103,8 +104,8 @@ function prompt_electro_setup {
   #
 
   # ✘
-  PROMPT='%{%F{blue}%}%B┌─[%b ${_prompt_xt_user_host}%{%F{blue}%}${_prompt_xt_pwd} ${vcs_info_msg_0_}%{%F{blue}%}%B]%b
-%{%F{blue}%}%B└─[%b %(?:%{%F{black}%}✓:%{%F{red}%}×) %{%F{blue}%}%B]%b %{%(#~%{%F{red}%}~%{%F{magenta}%})%}%B%(!:ϟ:λ) %{%f%}%b'
+  PROMPT='%{%F{blue}%}%B┌─[%b ${_prompt_xt_user_host}%{%F{green}%}${_prompt_xt_pwd} ${vcs_info_msg_0_}%{%F{blue}%}%B]%b
+%{%F{blue}%}%B└─[%b %(?:%{%F{green}%}✓:%{%F{red}%}×) %{%F{blue}%}%B]%b %{%(#~%{%F{red}%}~%{%F{magenta}%})%}%B%(!:ϟ:λ) %{%f%}%b'
 
   PROMPT2='%{%F{blue}%}%B◀ %{%f%}%b'
 
