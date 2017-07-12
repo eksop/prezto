@@ -45,7 +45,7 @@ function _xt_set_user_host() {
 
 function _xt_set_timer() {
   if [ $xt_timer ]; then
-    timer_show=$(_xt_displaytime ($(($SECONDS - $xt_timer))))
+    timer_show=$(_xt_displaytime $(($SECONDS - $xt_timer)))
     _xt_timer_show="%F{cyan}${timer_show}%f %F{black}%BΞ%b%f "
     unset xt_timer
   fi
