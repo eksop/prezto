@@ -122,7 +122,7 @@ License
 This project is licensed under the MIT License.
 
 [1]: http://www.zsh.org
-[2]: https://github.com/rajats105/prezto/blob/master/zprezto_electro.png?raw=true "electro theme"
+[2]: https://github.com/rajats105/prezto/blob/master/electro_theme.png?raw=true "electro theme"
 [3]: http://git-scm.com
 [4]: https://github.com
 [5]: http://gitimmersion.com
