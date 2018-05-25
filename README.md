@@ -88,7 +88,7 @@ accompanying README files to learn of what is available.
   3. Load the theme you like in *~/.zpreztorc* then open a new Zsh terminal
      window or tab.
 
-     ![sorin theme][2]
+     ![electro theme][2]
 
 ### External Modules
 
@@ -122,7 +122,7 @@ License
 This project is licensed under the MIT License.
 
 [1]: http://www.zsh.org
-[2]: http://i.imgur.com/nrGV6pg.png "sorin theme"
+[2]: https://github.com/rajats105/prezto/blob/master/zprezto_electro.png?raw=true "electro theme"
 [3]: http://git-scm.com
 [4]: https://github.com
 [5]: http://gitimmersion.com
