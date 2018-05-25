@@ -12,8 +12,8 @@ fi
 
 # Customize to your needs...
 
-HISTSIZE=50000
-SAVEHIST=50000
+HISTSIZE=100000
+SAVEHIST=100000
 
 setopt HIST_IGNORE_DUPS
 
@@ -25,5 +25,3 @@ source ~/.functions
 
 # Aliases
 source ~/.aliases
-
-# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
