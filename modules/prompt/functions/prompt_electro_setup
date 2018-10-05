@@ -105,7 +105,7 @@ function prompt_electro_setup {
 
   # ✘
   PROMPT='%{%F{blue}%}%B┌─[%b ${_prompt_xt_user_host}%{%F{green}%}${_prompt_xt_pwd} ${vcs_info_msg_0_}%{%F{blue}%}%B]%b
-%{%F{blue}%}%B└─[%b %(?:%{%F{green}%}✓:%{%F{red}%}×) %{%F{blue}%}%B]%b %{%(#~%{%F{red}%}~%{%F{magenta}%})%}%B%(!:ϟ:λ) %{%f%}%b'
+%{%F{blue}%}%B└─[%b %(?:%{%F{green}%}✓:%{%F{red}%}×) %{%F{blue}%}%B]%b %{%(#~%{%F{red}%}~%{%F{red}%})%}%B%(!:ϟ:λ) %{%f%}%b'
 
   PROMPT2='%{%F{blue}%}%B◀ %{%f%}%b'
 
