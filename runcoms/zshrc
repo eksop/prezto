@@ -17,11 +17,15 @@ SAVEHIST=100000
 
 setopt HIST_IGNORE_DUPS
 
+xt_f_func=~/.function
+xt_f_alias=~/.alias
+xt_f_export=~/.export
+
 # Functions
-[[ -a "~/.function" ]] && source "~/.function"
+[[ -a "$xt_f_func" ]] && source "$xt_f_func:A"
 
 # Aliases
-[[ -a "~/.alias" ]] && source "~/.alias"
+[[ -a "$xt_f_alias" ]] && source "$xt_f_alias:A"
 
 # Exports
-[[ -a "~/.export" ]] && source "~/.export"
+[[ -a "$xt_f_export" ]] && source "$xt_f_export:A"
