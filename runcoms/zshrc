@@ -17,18 +17,11 @@ SAVEHIST=100000
 
 setopt HIST_IGNORE_DUPS
 
-# Exports
-if [[ -s "~/.export" ]]; then
-  source "~/.export"
-fi
-
 # Functions
-if [[ -s "~/.function" ]]; then
-  source "~/.function"
-fi
+[[ -a "~/.function" ]] && source "~/.function"
 
 # Aliases
-if [[ -s "~/.aliases" ]]; then
-  source "~/.aliases"
-fi
+[[ -a "~/.alias" ]] && source "~/.alias"
 
+# Exports
+[[ -a "~/.export" ]] && source "~/.export"
