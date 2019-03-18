@@ -35,9 +35,9 @@ function _xt_set_pwd() {
 
 function _xt_set_user_host() {
   if [[ "$SSH_CONNECTION" != '' ]]; then
-    _prompt_xt_user_host="%(!:%{%F{red}%}:%{%F{green}%})%n%{%F{black}%}%B Ξ%b %{%F{cyan}%}%m %{%F{black}%}%BΞ%b "
+    _prompt_xt_user_host="%(!:%{%F{160}%}:%{%F{28}%})%n%{%F{0}%}%B ―%b %{%F{55}%}%m %{%F{0}%}%B―%b "
   elif [[ $UID -eq 0 ]]; then
-    _prompt_xt_user_host="%(!:%{%F{red}%}:%{%F{green}%})%n%{%F{black}%}%B Ξ%b %{%F{cyan}%}%m %{%F{black}%}%BΞ%b "
+    _prompt_xt_user_host="%(!:%{%F{160}%}:%{%F{28}%})%n%{%F{0}%}%B ―%b %{%F{55}%}%m %{%F{0}%}%B―%b "
   else
     _prompt_xt_user_host=""
   fi
@@ -46,7 +46,7 @@ function _xt_set_user_host() {
 function _xt_set_timer() {
   if [ $xt_timer ]; then
     timer_show=$(_xt_displaytime $(($SECONDS - $xt_timer)))
-    _xt_timer_show="%F{cyan}${timer_show}%f %F{black}%BΞ%b%f "
+    _xt_timer_show="%F{124}${timer_show}%f %F{0}%B―%b%f "
     unset xt_timer
   fi
 }
@@ -94,24 +94,24 @@ function prompt_electro_setup {
   # Set vcs_info parameters.
   zstyle ':vcs_info:*' enable bzr git hg svn
   zstyle ':vcs_info:*' check-for-changes true
-  zstyle ':vcs_info:*' stagedstr '%F{green} ✔%f'
-  zstyle ':vcs_info:*' unstagedstr '%F{red} ✘%f'
-  zstyle ':vcs_info:*' actionformats '%F{black}%BΞ%%b%f %F{cyan}%b%f%c%u %F{green}(%a)%f '
-  zstyle ':vcs_info:*' formats "%F{black}%BΞ%%b%f %F{cyan}%b%f%c%u "
+  zstyle ':vcs_info:*' stagedstr '%F{28} ✔%f'
+  zstyle ':vcs_info:*' unstagedstr '%F{160} ✘%f'
+  zstyle ':vcs_info:*' actionformats '%F{0}%B―%%b%f %F{55}%b%f%c%u %F{28}(%a)%f '
+  zstyle ':vcs_info:*' formats "%F{0}%B―%%b%f %F{55}%b%f%c%u "
   zstyle ':vcs_info:*' nvcsformats "%b%f"
 
   # Define prompts.
   #
 
   # ✘
-  PROMPT='%{%F{blue}%}%B┌─[%b ${_prompt_xt_user_host}%{%F{green}%}${_prompt_xt_pwd} ${vcs_info_msg_0_}%{%F{blue}%}%B]%b
-%{%F{blue}%}%B└─[%b %(?:%{%F{green}%}✓:%{%F{red}%}×) %{%F{blue}%}%B]%b %{%(#~%{%F{red}%}~%{%F{red}%})%}%B%(!:ϟ:λ) %{%f%}%b'
+  PROMPT='%{%F{20}%}%B┌─❮❮%b ${_prompt_xt_user_host}%{%F{28}%}${_prompt_xt_pwd} ${vcs_info_msg_0_}%{%F{20}%}%B❯❯%b
+%{%F{20}%}%B└─❮%b %(?:%{%F{34}%}✔:%{%F{160}%}✘) %{%F{20}%}%B❯%b %{%(#~%{%F{160}%}~%{%F{196}%})%}%B%(!:ϟ:λ) %{%f%}%b'
 
-  PROMPT2='%{%F{blue}%}%B◀ %{%f%}%b'
+  PROMPT2='%{%F{20}%}%B◀ %{%f%}%b'
 
-  RPROMPT='%{$(echotc UP 1)%}%{%F{blue}%}%B[%b ${_xt_timer_show}%{%F{cyan}%}%T %{%F{blue}%}%B]%b%{$(echotc DO 1)%}%{%f%}%b'
+  RPROMPT='%{$(echotc UP 1)%}%{%F{20}%}%B❮❮%b ${_xt_timer_show}%{%F{124}%}%T %{%F{20}%}%B❯❯%b%{$(echotc DO 1)%}%{%f%}%b'
 
-  SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? %{%f%}%b'
+  SPROMPT='zsh: correct %F{160}%R%f to %F{28}%r%f [nyae]? %{%f%}%b'
 }
 
 function prompt_electro_preview {
