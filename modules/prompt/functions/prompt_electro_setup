@@ -15,9 +15,11 @@ function _xt_displaytime() {
   local H=$((T/60/60%24))
   local M=$((T/60%60))
   local S=$((T%60))
+
   (( $D > 0 )) && printf '%dd ' $D
   (( $H > 0 )) && printf '%dh ' $H
   (( $M > 0 )) && printf '%dm ' $M
+
   printf '%ds' $S
 }
 
@@ -59,16 +61,16 @@ function prompt_electro_precmd {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
 
-  # Set timers
+  # Set timers.
   _xt_set_timer
 
-  # Format PWD.
+  # Format pwd.
   _xt_set_pwd
 
-  # Set user and host
+  # Set user and host.
   _xt_set_user_host
 
-  # VCS info
+  # VCS info.
   vcs_info
 }
 
@@ -100,18 +102,18 @@ function prompt_electro_setup {
   zstyle ':vcs_info:*' formats "%F{0}%B―%%b%f %F{55}%b%f%c%u "
   zstyle ':vcs_info:*' nvcsformats "%b%f"
 
-  # Define prompts.
-  #
-
-  # ✘
+  # Main prompt.
   PROMPT='%{%F{20}%}%B┌─❮❮%b ${_prompt_xt_user_host}%{%F{28}%}${_prompt_xt_pwd} ${vcs_info_msg_0_}%{%F{20}%}%B❯❯%b
 %{%F{20}%}%B└─❮%b %(?:%{%F{34}%}✔:%{%F{160}%}✘) %{%F{20}%}%B❯%b %{%(#~%{%F{160}%}~%{%F{196}%})%}%B%(!:ϟ:λ) %{%f%}%b'
 
-  PROMPT2='%{%F{20}%}%B◀ %{%f%}%b'
-
+  # Right prompt.
   RPROMPT='%{$(echotc UP 1)%}%{%F{20}%}%B❮❮%b ${_xt_timer_show}%{%F{124}%}%T %{%F{20}%}%B❯❯%b%{$(echotc DO 1)%}%{%f%}%b'
 
-  SPROMPT='zsh: correct %F{160}%R%f to %F{28}%r%f [nyae]? %{%f%}%b'
+  # Right prompt 2.
+  PROMPT2='%{%F{20}%}%B◀ %{%f%}%b'
+
+  # Substitute prompt.
+  SPROMPT='%F{28}%Bzsh: %f%bcorrect %F{160}%B%R%f%b to %F{28}%B%r%f%b %F{20}%B[nyae]? %{%f%}%b'
 }
 
 function prompt_electro_preview {
