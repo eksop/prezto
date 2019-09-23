@@ -103,8 +103,17 @@ function prompt_electro_setup {
   zstyle ':vcs_info:*' nvcsformats "%b%f"
 
   # Main prompt.
-  PROMPT='%{%F{20}%}%B┌─❮❮%b ${_prompt_xt_user_host}%{%F{28}%}${_prompt_xt_pwd} ${vcs_info_msg_0_}%{%F{20}%}%B❯❯%b
-%{%F{20}%}%B└─❮%b %(?:%{%F{34}%}✔:%{%F{160}%}✘) %{%F{20}%}%B❯%b %{%(#~%{%F{160}%}~%{%F{196}%})%}%B%(!:ϟ:λ) %{%f%}%b'
+  PROMPT='%{%F{20}%}%B╭─❮❮%b ${_prompt_xt_user_host}%{%F{28}%}${_prompt_xt_pwd} ${vcs_info_msg_0_}%{%F{20}%}%B❯❯%b
+%{%F{20}%}%B╰─❮%b %(?:%{%F{34}%}✔:%{%F{160}%}✘) %{%F{20}%}%B❯%b %{%(#~%{%F{160}%}~%{%F{196}%})%}%B%(!:ϟ:λ) %{%f%}%b'
+
+  #┏━
+  #┗━
+  #┌─
+  #└─
+  #╔═
+  #╚═
+  #╭─
+  #╰─
 
   # Right prompt.
   RPROMPT='%{$(echotc UP 1)%}%{%F{20}%}%B❮❮%b ${_xt_timer_show}%{%F{124}%}%T %{%F{20}%}%B❯❯%b%{$(echotc DO 1)%}%{%f%}%b'
