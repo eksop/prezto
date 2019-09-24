@@ -31,3 +31,5 @@ xt_f_export=~/.export
 [[ -a "$xt_f_export" ]] && source "$xt_f_export:A"
 
 eval "$(direnv hook zsh)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
