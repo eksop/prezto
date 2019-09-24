@@ -1,0 +1,137 @@
+#
+# A simple theme that displays relevant, contextual information.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Rajat Shukla <shk.rajat@gmail.com>
+#
+
+# Load dependencies.
+pmodload 'helper'
+
+function _xt_displaytime() {
+  local T=$1
+  local D=$((T/60/60/24))
+  local H=$((T/60/60%24))
+  local M=$((T/60%60))
+  local S=$((T%60))
+
+  (( $D > 0 )) && printf '%dd ' $D
+  (( $H > 0 )) && printf '%dh ' $H
+  (( $M > 0 )) && printf '%dm ' $M
+
+  printf '%ds' $S
+}
+
+function _xt_set_pwd() {
+  local pwd="${PWD/#$HOME/~}"
+
+  if [[ "$pwd" == (#m)[/~] ]]; then
+    _prompt_xt_pwd="$MATCH"
+    unset MATCH
+  else
+    _prompt_xt_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
+    # _prompt_xt_pwd="${${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}:h}%/}//\%/%%}/${${${${pwd}:h}:t}//\%/%%}/${${pwd:t}//\%/%%}"
+  fi
+}
+
+function _xt_set_user_host() {
+  if [[ "$SSH_CONNECTION" != '' ]]; then
+    _prompt_xt_user_host="%(!:%{%F{167}%}:%{%F{34}%})%n%{%F{0}%}%B ―%b %{%F{134}%}%m %{%F{0}%}%B―%b "
+  elif [[ $UID -eq 0 ]]; then
+    _prompt_xt_user_host="%(!:%{%F{167}%}:%{%F{34}%})%n%{%F{0}%}%B ―%b %{%F{134}%}%m %{%F{0}%}%B―%b "
+  else
+    _prompt_xt_user_host=""
+  fi
+}
+
+function _xt_set_timer() {
+  if [ $xt_timer ]; then
+    timer_show=$(_xt_displaytime $(($SECONDS - $xt_timer)))
+    _xt_timer_show="%F{167}${timer_show}%f %F{0}%B―%b%f "
+    unset xt_timer
+  fi
+}
+
+function prompt_aurora_preexec {
+  xt_timer=${xt_timer:-$SECONDS}
+}
+
+function prompt_aurora_precmd {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+
+  # Set timers.
+  _xt_set_timer
+
+  # Format pwd.
+  _xt_set_pwd
+
+  # Set user and host.
+  _xt_set_user_host
+
+  # VCS info.
+  vcs_info
+}
+
+function prompt_aurora_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  # Load required functions.
+  autoload -Uz add-zsh-hook
+  autoload -Uz vcs_info
+
+  # Add hook for calling git-info before each command.
+  add-zsh-hook precmd prompt_aurora_precmd
+  add-zsh-hook preexec prompt_aurora_preexec
+
+  # Set editor-info parameters.
+  zstyle ':prezto:module:editor:info:completing' format '%B%F{243}...%f%b'
+  zstyle ':prezto:module:editor:info:keymap:primary' format ' %B%F{167}❯%F{185}❯%F{34}❯%f%b'
+  zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format ' %F{185}♺%f'
+  zstyle ':prezto:module:editor:info:keymap:alternate' format ' %B%F{34}❮%F{185}❮%F{167}❮%f%b'
+
+  # Set vcs_info parameters.
+  zstyle ':vcs_info:*' enable bzr git hg svn
+  zstyle ':vcs_info:*' check-for-changes true
+  zstyle ':vcs_info:*' stagedstr '%F{34} ✔%f'
+  zstyle ':vcs_info:*' unstagedstr '%F{167} ✘%f'
+  zstyle ':vcs_info:*' actionformats '%F{0}%B―%%b%f %F{134}%b%f%c%u %F{34}(%a)%f '
+  zstyle ':vcs_info:*' formats "%F{0}%B―%%b%f %F{134}%b%f%c%u "
+  zstyle ':vcs_info:*' nvcsformats "%b%f"
+
+  # Main prompt.
+  PROMPT='%{%F{33}%}%B╭─❮❮%b ${_prompt_xt_user_host}%{%F{34}%}${_prompt_xt_pwd} ${vcs_info_msg_0_}%{%F{33}%}%B❯❯%b
+%{%F{33}%}%B╰─❮%b %(?:%{%F{34}%}✔:%{%F{167}%}✘) %{%F{33}%}%B❯%b %{%(#~%{%F{167}%}~%{%F{196}%})%}%B%(!:ϟ:λ) %{%f%}%b'
+
+  #┏━
+  #┗━
+  #┌─
+  #└─
+  #╔═
+  #╚═
+  #╭─
+  #╰─
+
+  # Right prompt.
+  RPROMPT='%{$(echotc UP 1)%}%{%F{33}%}%B❮❮%b ${_xt_timer_show}%{%F{167}%}%T %{%F{33}%}%B❯❯%b%{$(echotc DO 1)%}%{%f%}%b'
+
+  # Right prompt 2.
+  PROMPT2='%{%F{33}%}%B◀ %{%f%}%b'
+
+  # Substitute prompt.
+  SPROMPT='%F{34}%Bzsh: %f%bcorrect %F{167}%B%R%f%b to %F{34}%B%r%f%b %F{33}%B[nyae]? %{%f%}%b'
+}
+
+function prompt_aurora_preview {
+  local +h PROMPT=''
+  local +h RPROMPT=''
+  local +h SPROMPT=''
+
+  editor-info 2>/dev/null
+  prompt_preview_theme 'aurora'
+}
+
+prompt_aurora_setup "$@"
