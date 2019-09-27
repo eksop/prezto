@@ -19,7 +19,8 @@
 
   # Print a random, hopefully interesting, adage.
   if (( $+commands[fortune] )) && (( $+commands[cowthink] )); then
-    fortune -o | cowthink -s -f tux
+    fortune -e work | cowthink -W 80 -f neo
+    # fortune -o | cowthink -f walter
     print
   fi
 
