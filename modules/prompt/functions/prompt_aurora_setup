@@ -48,7 +48,7 @@ function _xt_set_user_host() {
 function _xt_set_timer() {
   if [ $xt_timer ]; then
     timer_show=$(_xt_displaytime $(($SECONDS - $xt_timer)))
-    _xt_timer_show="%F{203}${timer_show}%f %F{0}%B―%b%f "
+    _xt_timer_show="%F{34}${timer_show}%f %F{0}%B―%b%f "
     unset xt_timer
   fi
 }
@@ -116,7 +116,7 @@ function prompt_aurora_setup {
   #╰─
 
   # Right prompt.
-  RPROMPT='%{$(echotc UP 1)%}%{%F{33}%}%B❮❮%b ${_xt_timer_show}%{%F{203}%}%T %{%F{33}%}%B❯❯%b%{$(echotc DO 1)%}%{%f%}%b'
+  RPROMPT='%{$(echotc UP 1)%}%{%F{33}%}%B❮❮%b ${_xt_timer_show}%{%F{34}%}%T %{%F{33}%}%B❯❯%b%{$(echotc DO 1)%}%{%f%}%b'
 
   # Right prompt 2.
   PROMPT2='%{%F{33}%}%B◀ %{%f%}%b'
