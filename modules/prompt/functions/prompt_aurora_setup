@@ -37,9 +37,9 @@ function _xt_set_pwd() {
 
 function _xt_set_user_host() {
   if [[ "$SSH_CONNECTION" != '' ]]; then
-    _prompt_xt_user_host="%(!:%{%F{203}%}:%{%F{34}%})%n%{%F{0}%}%B ―%b %{%F{134}%}%m %{%F{0}%}%B―%b "
+    _prompt_xt_user_host="%(!:%{%F{5}%}:%{%F{2}%})%n%{%F{0}%}%B ―%b %{%F{5}%}%m %{%F{0}%}%B―%b "
   elif [[ $UID -eq 0 ]]; then
-    _prompt_xt_user_host="%(!:%{%F{203}%}:%{%F{34}%})%n%{%F{0}%}%B ―%b %{%F{134}%}%m %{%F{0}%}%B―%b "
+    _prompt_xt_user_host="%(!:%{%F{5}%}:%{%F{2}%})%n%{%F{0}%}%B ―%b %{%F{5}%}%m %{%F{0}%}%B―%b "
   else
     _prompt_xt_user_host=""
   fi
@@ -48,7 +48,7 @@ function _xt_set_user_host() {
 function _xt_set_timer() {
   if [ $xt_timer ]; then
     timer_show=$(_xt_displaytime $(($SECONDS - $xt_timer)))
-    _xt_timer_show="%F{34}${timer_show}%f %F{0}%B―%b%f "
+    _xt_timer_show="%F{2}${timer_show}%f %F{0}%B―%b%f "
     unset xt_timer
   fi
 }
@@ -88,23 +88,23 @@ function prompt_aurora_setup {
   add-zsh-hook preexec prompt_aurora_preexec
 
   # Set editor-info parameters.
-  zstyle ':prezto:module:editor:info:completing' format '%B%F{243}...%f%b'
-  zstyle ':prezto:module:editor:info:keymap:primary' format ' %B%F{203}❯%F{185}❯%F{34}❯%f%b'
-  zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format ' %F{185}♺%f'
-  zstyle ':prezto:module:editor:info:keymap:alternate' format ' %B%F{34}❮%F{185}❮%F{203}❮%f%b'
+  zstyle ':prezto:module:editor:info:completing' format '%B%F{8}...%f%b'
+  zstyle ':prezto:module:editor:info:keymap:primary' format ' %B%F{5}❯%F{8}❯%F{2}❯%f%b'
+  zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format ' %F{8}♺%f'
+  zstyle ':prezto:module:editor:info:keymap:alternate' format ' %B%F{2}❮%F{8}❮%F{5}❮%f%b'
 
   # Set vcs_info parameters.
   zstyle ':vcs_info:*' enable bzr git hg svn
   zstyle ':vcs_info:*' check-for-changes true
-  zstyle ':vcs_info:*' stagedstr '%F{34} ✔%f'
-  zstyle ':vcs_info:*' unstagedstr '%F{203} ✘%f'
-  zstyle ':vcs_info:*' actionformats '%F{0}%B―%%b%f %F{134}%b%f%c%u %F{34}(%a)%f '
-  zstyle ':vcs_info:*' formats "%F{0}%B―%%b%f %F{134}%b%f%c%u "
+  zstyle ':vcs_info:*' stagedstr '%F{2} ✔%f'
+  zstyle ':vcs_info:*' unstagedstr '%F{5} ✘%f'
+  zstyle ':vcs_info:*' actionformats '%F{0}%B―%%b%f %F{5}%b%f%c%u %F{2}(%a)%f '
+  zstyle ':vcs_info:*' formats "%F{0}%B―%%b%f %F{5}%b%f%c%u "
   zstyle ':vcs_info:*' nvcsformats "%b%f"
 
   # Main prompt.
-  PROMPT='%{%F{33}%}%B╭─❮❮%b ${_prompt_xt_user_host}%{%F{34}%}${_prompt_xt_pwd} ${vcs_info_msg_0_}%{%F{33}%}%B❯❯%b
-%{%F{33}%}%B╰─❮%b %(?:%{%F{34}%}✔:%{%F{203}%}✘) %{%F{33}%}%B❯%b %{%(#~%{%F{203}%}~%{%F{196}%})%}%B%(!:ϟ:λ) %{%f%}%b'
+  PROMPT='%{%F{4}%}%B╭─❮❮%b ${_prompt_xt_user_host}%{%F{2}%}${_prompt_xt_pwd} ${vcs_info_msg_0_}%{%F{4}%}%B❯❯%b
+%{%F{4}%}%B╰─❮%b %(?:%{%F{2}%}✔:%{%F{5}%}✘) %{%F{4}%}%B❯%b %{%(#~%{%F{5}%}~%{%F{3}%})%}%B%(!:ϟ:λ) %{%f%}%b'
 
   #┏━
   #┗━
@@ -116,13 +116,13 @@ function prompt_aurora_setup {
   #╰─
 
   # Right prompt.
-  RPROMPT='%{$(echotc UP 1)%}%{%F{33}%}%B❮❮%b ${_xt_timer_show}%{%F{34}%}%T %{%F{33}%}%B❯❯%b%{$(echotc DO 1)%}%{%f%}%b'
+  RPROMPT='%{$(echotc UP 1)%}%{%F{4}%}%B❮❮%b ${_xt_timer_show}%{%F{2}%}%T %{%F{4}%}%B❯❯%b%{$(echotc DO 1)%}%{%f%}%b'
 
   # Right prompt 2.
-  PROMPT2='%{%F{33}%}%B◀ %{%f%}%b'
+  PROMPT2='%{%F{4}%}%B◀ %{%f%}%b'
 
   # Substitute prompt.
-  SPROMPT='%F{34}%Bzsh: %f%bcorrect %F{203}%B%R%f%b to %F{34}%B%r%f%b %F{33}%B[nyae]? %{%f%}%b'
+  SPROMPT='%F{2}%Bzsh: %f%bcorrect %F{5}%B%R%f%b to %F{2}%B%r%f%b %F{4}%B[nyae]? %{%f%}%b'
 }
 
 function prompt_aurora_preview {
