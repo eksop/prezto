@@ -5,9 +5,10 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-eval "$(dircolors -p | \
-    sed 's/ 4[0-9];/ 01;/; s/;4[0-9];/;01;/g; s/;4[0-9] /;01 /' | \
-    dircolors /dev/stdin)"
+# Only for linux
+#eval "$(dircolors -p | \
+#    sed 's/ 4[0-9];/ 01;/; s/;4[0-9];/;01;/g; s/;4[0-9] /;01 /' | \
+#    dircolors /dev/stdin)"
 
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
@@ -41,4 +42,4 @@ xt_f_export=~/.export
 eval "$(direnv hook zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
+[ -f /opt/local/share/fzf/shell/key-bindings.zsh ] && source /opt/local/share/fzf/shell/key-bindings.zsh
