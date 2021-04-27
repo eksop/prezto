@@ -20,7 +20,7 @@ version is 4.3.11.
   2. Clone the repository:
 
      ```console
-     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+     git clone --recursive https://github.com/eksop/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
      ```
 
   3. Create a new Zsh configuration by copying the Zsh configuration files
@@ -66,8 +66,7 @@ To pull the latest changes and update submodules manually:
 
 ```console
 cd $ZPREZTODIR
-git pull
-git submodule update --init --recursive
+git pullgit submodule update --init --recursive --remote --merge
 ```
 
 Usage
