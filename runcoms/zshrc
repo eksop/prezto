@@ -5,15 +5,6 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# Only for linux
-#eval "$(dircolors -p | \
-#    sed 's/ 4[0-9];/ 01;/; s/;4[0-9];/;01;/g; s/;4[0-9] /;01 /' | \
-#    dircolors /dev/stdin)"
-
-BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-    eval "$("$BASE16_SHELL/profile_helper.sh")"
-
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -21,25 +12,11 @@ fi
 
 # Customize to your needs...
 
-HISTSIZE=100000
-SAVEHIST=100000
+__file_function=~/.config/custom/function.sh
+__file_alias=~/.config/custom/alias.sh
+__file_export=~/.config/custom/export.sh
 
-setopt HIST_IGNORE_DUPS
+[[ -a "$__file_function" ]] && source "$__file_function:A"
+[[ -a "$__file_alias" ]] && source "$__file_alias:A"
+[[ -a "$__file_export" ]] && source "$__file_export:A"
 
-xt_f_func=~/.function
-xt_f_alias=~/.alias
-xt_f_export=~/.export
-
-# Functions
-[[ -a "$xt_f_func" ]] && source "$xt_f_func:A"
-
-# Aliases
-[[ -a "$xt_f_alias" ]] && source "$xt_f_alias:A"
-
-# Exports
-[[ -a "$xt_f_export" ]] && source "$xt_f_export:A"
-
-eval "$(direnv hook zsh)"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f /opt/local/share/fzf/shell/key-bindings.zsh ] && source /opt/local/share/fzf/shell/key-bindings.zsh

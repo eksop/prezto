@@ -44,7 +44,7 @@ function zprezto-update {
         printf "There is an update available. Trying to pull.\n\n"
         if git pull --ff-only; then
           printf "Syncing submodules\n"
-          git submodule update --init --recursive
+          git submodule update --init --recursive --remote --merge
           return $?
         else
           cannot-fast-forward
