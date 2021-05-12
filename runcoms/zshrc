@@ -12,11 +12,4 @@ fi
 
 # Customize to your needs...
 
-__file_function=~/.config/custom/function.sh
-__file_alias=~/.config/custom/alias.sh
-__file_export=~/.config/custom/export.sh
-
-[[ -a "$__file_function" ]] && source "$__file_function:A"
-[[ -a "$__file_alias" ]] && source "$__file_alias:A"
-[[ -a "$__file_export" ]] && source "$__file_export:A"
-
+[[ -f "$HOME/.zshcustom" ]] && source $HOME/.zshcustom
