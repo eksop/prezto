@@ -116,7 +116,7 @@ function prompt_aurora_setup {
   #╰─
 
   # Right prompt.
-  RPROMPT='%{$(echotc UP 1)%}%{%F{4}%}%B❮❮%b ${_xt_timer_show}%{%F{2}%}%T %{%F{4}%}%B❯❯%b%{$(echotc DO 1)%}%{%f%}%b'
+  #RPROMPT='%{$(echotc UP 1)%}%{%F{4}%}%B❮❮%b ${_xt_timer_show}%{%F{2}%}%T %{%F{4}%}%B❯❯%b%{$(echotc DO 1)%}%{%f%}%b'
 
   # Right prompt 2.
   PROMPT2='%{%F{4}%}%B◀ %{%f%}%b'

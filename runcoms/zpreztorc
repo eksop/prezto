@@ -43,10 +43,7 @@ zstyle ':prezto:load' pmodule \
   'syntax-highlighting' \
   'history-substring-search' \
   'autosuggestions' \
-  'ssh' \
-  'osx' \
-  'macports' \
-  'utility' \
+  'ssh'
 
 #
 # Autosuggestions
@@ -231,5 +228,5 @@ zstyle ':prezto:module:syntax-highlighting' styles \
 # Enabled safe options. This aliases cp, ln, mv and rm so that they prompt
 # before deleting or overwriting files. Set to 'no' to disable this safer
 # behavior.
-# zstyle ':prezto:module:utility' safe-ops 'yes'
+zstyle ':prezto:module:utility' safe-ops 'yes'
 
